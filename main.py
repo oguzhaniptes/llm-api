@@ -59,7 +59,7 @@ def chatbot_response(history):
         **inputs, max_length=512, min_length=10, pad_token_id=tokenizer.eos_token_id
     )
 
-    reply = tokenizer.decode(reply_ids[0], skip_special_tokens=True).strip()
+    reply = tokenizer.decode(reply_ids[0], skip_special_tokens=True)
 
     if torch.cuda.is_available():
         model.to("cpu")
@@ -67,7 +67,7 @@ def chatbot_response(history):
 
     gc.collect()
 
-    return reply
+    return reply.strip()
 
 
 @app.post("/chat")
